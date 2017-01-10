@@ -1,0 +1,37 @@
+{
+    "preguntas":[
+    {
+        "id": "pregunta1",
+        "enunciado": "Todo lo que puedas",
+        "frase": ", es real.",
+        "opciones": [
+            "himaginar",
+            "imaginar",
+            "imajinar",
+            "himajinar"
+        ]
+    }, 
+    {
+        "id": "pregunta2",
+        "enunciado": "El que",
+        "frase": "la paz interior, se siente bien consigo mismo.",
+        "opciones": [
+            "haya",
+            "alla",
+            "halla",
+            "aya"
+        ]
+    }, 
+    {
+        "id": "pregunta3",
+        "enunciado": "El primer paso de la",
+        "frase": ", es presumir de saber.",
+        "opciones": [
+            "hignorancia",
+            "ignorancia",
+            "innorancia",
+            "hinnoranzia"
+        ]
+    }
+    ]
+}

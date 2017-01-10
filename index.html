@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<script src="js/angular.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="customersCtrl"> 
+    <form name="questionsForm" ng-submit="validate()">
+<ul>
+  <li ng-repeat="x in myData">
+    {{ x.id + ', ' + x.enunciado }}
+    <input type="text" value="{{ myVar }}">
+    {{ x.frase }}
+    <br>
+    <div class="form-group">
+            <div class="radio">
+                <label>
+                    <input type="radio" ng-model="myVar" ng-click="dato(x.opciones[0])" value=" {{ x.opciones[0] }} ">{{ x.opciones[0] }}<br>
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" ng-model="myVar" ng-click="dato(x.opciones[1])" value=" {{ x.opciones[1] }} ">{{ x.opciones[1] }}<br>
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" ng-model="myVar" ng-click="dato(x.opciones[2])" value=" {{ x.opciones[2] }} ">{{ x.opciones[2] }}<br>
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" ng-model="myVar" ng-click="dato(x.opciones[3])" value=" {{ x.opciones[3] }} ">{{ x.opciones[3] }}<br>
+                </label>
+            </div>
+        </div>
+  </li>
+</ul>
+<input type='submit' value="Validar respuestas">
+      {{selected_ids}}
+</form>
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('customersCtrl', function($scope, $http) {
+    $scope.selected_ids= [];
+    //otherVar= [];
+    $scope.dato= function(seleccionado){
+        alert("seleccionado: " + seleccionado);
+        //angular.forEach(otherVar, function(value, key) {
+            //$scope.selected_ids= 'La seleccion es: ' + seleccionado);
+        //});
+    };
+  $http.get("data/principiante.json").then(function (response) {
+      $scope.myData = response.data.preguntas;
+  });
+  
+});
+//http://www.w3schools.com/angular/angular_http.asp
+//http://www.w3schools.com/angular/angular_forms.asp
+//http://stackoverflow.com/questions/15166270/how-can-i-get-the-value-of-the-checked-radio-button-when-submitting-a-form-using
+</script>
+
+</body>
+</html>
