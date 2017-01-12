@@ -1,0 +1,16 @@
+{
+    "preguntas":[
+    {
+        "id": "pregunta1",
+        "respuesta": "imaginar",
+    }, 
+    {
+        "id": "pregunta2",
+        "respuesta": "halla",
+    }, 
+    {
+        "id": "pregunta3",
+        "respuesta": "ignorancia",
+    }
+    ]
+}

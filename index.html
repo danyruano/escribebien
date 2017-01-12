@@ -14,22 +14,22 @@
     <div class="form-group">
             <div class="radio">
                 <label>
-                    <input type="radio" ng-model="myVar" ng-click="dato(x.opciones[0])" value=" {{ x.opciones[0] }} ">{{ x.opciones[0] }}<br>
+                    <input type="radio" ng-model="myVar" ng-click="dato(x.id, x.opciones[0])" value=" {{ x.opciones[0] }} ">{{ x.opciones[0] }}<br>
                 </label>
             </div>
             <div class="radio">
                 <label>
-                    <input type="radio" ng-model="myVar" ng-click="dato(x.opciones[1])" value=" {{ x.opciones[1] }} ">{{ x.opciones[1] }}<br>
+                    <input type="radio" ng-model="myVar" ng-click="dato(x.id, x.opciones[1])" value=" {{ x.opciones[1] }} ">{{ x.opciones[1] }}<br>
                 </label>
             </div>
             <div class="radio">
                 <label>
-                    <input type="radio" ng-model="myVar" ng-click="dato(x.opciones[2])" value=" {{ x.opciones[2] }} ">{{ x.opciones[2] }}<br>
+                    <input type="radio" ng-model="myVar" ng-click="dato(x.id, x.opciones[2])" value=" {{ x.opciones[2] }} ">{{ x.opciones[2] }}<br>
                 </label>
             </div>
             <div class="radio">
                 <label>
-                    <input type="radio" ng-model="myVar" ng-click="dato(x.opciones[3])" value=" {{ x.opciones[3] }} ">{{ x.opciones[3] }}<br>
+                    <input type="radio" ng-model="myVar" ng-click="dato(x.id, x.opciones[3])" value=" {{ x.opciones[3] }} ">{{ x.opciones[3] }}<br>
                 </label>
             </div>
         </div>
@@ -43,17 +43,44 @@
 <script>
 var app = angular.module('myApp', []);
 app.controller('customersCtrl', function($scope, $http) {
-    $scope.selected_ids= [];
-    //otherVar= [];
-    $scope.dato= function(seleccionado){
-        alert("seleccionado: " + seleccionado);
-        //angular.forEach(otherVar, function(value, key) {
-            //$scope.selected_ids= 'La seleccion es: ' + seleccionado);
-        //});
+    $scope.selected_ids= [{"pregunta1":"imaginar"}]; //variable en donde se guarda lo seleccionado en cada pregunta
+    //$scope.existe= 0;
+    $scope.rsp= null;
+    $scope.dato= function(codigo, seleccionado){ //por cada clic, se guarda la opción seleccionada
+      $scope.selected_ids[codigo]= seleccionado;
+      console.log($scope.selected_ids[codigo]);
+      /*
+      angular.forEach($scope.selected_ids, function (value, key) {
+        console.log(codigo + ":" + seleccionado);
+        console.log(value + ":" + key);
+        if(value == codigo){
+          $scope.selected_ids[codigo]= seleccionado;
+          $scope.existe= 1;
+            //looking_for_key = key;
+        }
+      });
+
+      if ($scope.existe == 0) {
+        $scope.selected_ids[codigo].push({codigo : seleccionado});
+      };
+      $scope.existe= 0;*/
     };
-  $http.get("data/principiante.json").then(function (response) {
+  $http.get("data/principiante.json").then(function (response) { //se lee el archivo con las preguntas
       $scope.myData = response.data.preguntas;
+      /*
+      for (var j = 0; j < $scope.myData.length; j++){
+        $scope.selected_ids[j]= $scope.myData.preguntas[j].id;
+      }
+      */
   });
+  $scope.validate= function(){
+    $http.get("data/rspprincipiante.json").then(function (response) { //se lee el archivo con las preguntas
+        $scope.myRsp = response.data.preguntas;
+    });
+    /*for (var i = 0; i< myRsp.length; i++) {
+        Things[i]
+    };*/
+  };
   
 });
 //http://www.w3schools.com/angular/angular_http.asp
