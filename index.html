@@ -8,31 +8,41 @@
 <ul>
   <li ng-repeat="x in myData">
     {{ x.id + ', ' + x.enunciado }}
-    <input type="text" value="{{ myVar }}">
+    <input type="text" value="{{ option.descripcion }}">
     {{ x.frase }}
     <br>
-    <div class="form-group">
-            <div class="radio">
+    <!--<div class="form-group">-->
+      <!--<div class="radio">-->
+      <ul>
+        <li ng-repeat="option in x.opciones">
+              <label>
+            <input type="radio" name="option_question_{{x.id}}" ng-model="x.selected_id" ng-value="option.op"/>
+            {{option.descripcion}}
+          </label>
+            </li>
+            </ul>
+      <!--</div>-->
+            <!--<div class="radio">
                 <label>
-                    <input type="radio" ng-model="myVar" ng-click="dato(x.id, x.opciones[0])" value=" {{ x.opciones[0] }} ">{{ x.opciones[0] }}<br>
+                    <input type="radio" name="p_{{x.id}}" ng-model="x.selected_id" ng-value=" {{ x.opciones[0] }} ">{{ x.opciones[0] }}<br>
                 </label>
             </div>
             <div class="radio">
                 <label>
-                    <input type="radio" ng-model="myVar" ng-click="dato(x.id, x.opciones[1])" value=" {{ x.opciones[1] }} ">{{ x.opciones[1] }}<br>
+                    <input type="radio" name="p_{{x.id}}" ng-model="x.selected_id"  ng-value=" {{ x.opciones[1] }} ">{{ x.opciones[1] }}<br>
                 </label>
             </div>
             <div class="radio">
                 <label>
-                    <input type="radio" ng-model="myVar" ng-click="dato(x.id, x.opciones[2])" value=" {{ x.opciones[2] }} ">{{ x.opciones[2] }}<br>
+                    <input type="radio" name="p_{{x.id}}" ng-model="x.selected_id" ng-value=" {{ x.opciones[2] }} ">{{ x.opciones[2] }}<br>
                 </label>
             </div>
             <div class="radio">
                 <label>
-                    <input type="radio" ng-model="myVar" ng-click="dato(x.id, x.opciones[3])" value=" {{ x.opciones[3] }} ">{{ x.opciones[3] }}<br>
+                    <input type="radio" name="p_{{x.id}}" ng-model="x.selected_id" ng-value=" {{ x.opciones[3] }} ">{{ x.opciones[3] }}<br>
                 </label>
             </div>
-        </div>
+        </div>-->
   </li>
 </ul>
 <input type='submit' value="Validar respuestas">
@@ -43,28 +53,10 @@
 <script>
 var app = angular.module('myApp', []);
 app.controller('customersCtrl', function($scope, $http) {
-    $scope.selected_ids= [{"pregunta1":"imaginar"}]; //variable en donde se guarda lo seleccionado en cada pregunta
+    $scope.selected_ids= ['a']; //variable en donde se guarda lo seleccionado en cada pregunta
     //$scope.existe= 0;
-    $scope.rsp= null;
-    $scope.dato= function(codigo, seleccionado){ //por cada clic, se guarda la opción seleccionada
-      $scope.selected_ids[codigo]= seleccionado;
-      console.log($scope.selected_ids[codigo]);
-      /*
-      angular.forEach($scope.selected_ids, function (value, key) {
-        console.log(codigo + ":" + seleccionado);
-        console.log(value + ":" + key);
-        if(value == codigo){
-          $scope.selected_ids[codigo]= seleccionado;
-          $scope.existe= 1;
-            //looking_for_key = key;
-        }
-      });
-
-      if ($scope.existe == 0) {
-        $scope.selected_ids[codigo].push({codigo : seleccionado});
-      };
-      $scope.existe= 0;*/
-    };
+    //$scope.rsp= null;
+    //$scope.myVar= 0;
   $http.get("data/principiante.json").then(function (response) { //se lee el archivo con las preguntas
       $scope.myData = response.data.preguntas;
       /*
@@ -73,7 +65,13 @@ app.controller('customersCtrl', function($scope, $http) {
       }
       */
   });
-  $scope.validate= function(){
+  
+  $scope.validate= function(myVar){
+    //alert(myVar);
+    angular.forEach($scope.myData.preguntas, function(x) {
+      $scope.selected_ids.push(x.selected_id);
+    });
+    /*
     $http.get("data/rspprincipiante.json").then(function (response) { //se lee el archivo con las preguntas
         $scope.myRsp = response.data.preguntas;
     });
@@ -86,6 +84,9 @@ app.controller('customersCtrl', function($scope, $http) {
 //http://www.w3schools.com/angular/angular_http.asp
 //http://www.w3schools.com/angular/angular_forms.asp
 //http://stackoverflow.com/questions/15166270/how-can-i-get-the-value-of-the-checked-radio-button-when-submitting-a-form-using
+//http://jsfiddle.net/g/r9MLe/2/
+//http://jsfiddle.net/DrQ77/
+//http://stackoverflow.com/questions/25948683/how-to-get-multiple-radio-button-values-in-angularjs-form
 </script>
 
 </body>

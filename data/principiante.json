@@ -5,10 +5,10 @@
         "enunciado": "Todo lo que puedas",
         "frase": ", es real.",
         "opciones": [
-            "himaginar",
-            "imaginar",
-            "imajinar",
-            "himajinar"
+            {"op":"1", "descripcion":"himaginar"},
+            {"op":"2", "descripcion":"imaginar"},
+            {"op":"3", "descripcion":"imajinar"},
+            {"op":"4", "descripcion":"himajinar"}
         ]
     }, 
     {
@@ -16,10 +16,19 @@
         "enunciado": "El que",
         "frase": "la paz interior, se siente bien consigo mismo.",
         "opciones": [
-            "haya",
-            "alla",
-            "halla",
-            "aya"
+            {"op":"1", "descripcion":"haya"},
+            {
+                "op":"2",
+                "descripcion":"alla"
+            },
+            {
+                "op":"3",
+                "descripcion":"halla"
+            },
+            {
+                "op":"4",
+                "descripcion":"aya"
+            }
         ]
     }, 
     {
@@ -27,10 +36,22 @@
         "enunciado": "El primer paso de la",
         "frase": ", es presumir de saber.",
         "opciones": [
-            "hignorancia",
-            "ignorancia",
-            "innorancia",
-            "hinnoranzia"
+            {
+                "op":"1",
+                "descripcion":"hignorancia"
+            },
+            {
+                "op":"2",
+                "descripcion":"ignorancia"
+            },
+            {
+                "op":"3",
+                "descripcion":"innorancia"
+            },
+            {
+                "op":"4",
+                "descripcion":"hinnoranzia"
+            }
         ]
     }
     ]
