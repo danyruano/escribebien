@@ -8,19 +8,24 @@
 <ul>
   <li ng-repeat="x in myData">
     {{ x.id + ', ' + x.enunciado }}
-    <input type="text" value="{{ option.descripcion }}">
+    <!--<input type="text" value="{{ option.descripcion }}">-->
+    <!--<select ng-model="selected_id">
+        <option ng-repeat="option in x.opciones" value="option.op">{{option.descripcion}}</option>
+    </select>-->
+    <select data-role="listview" data-inset="true" ng-options="option as option.descripcion for option in x.opciones" ng-model="selected_ids[$index]" x-ng-change="update(option)"></select>
     {{ x.frase }}
     <br>
     <!--<div class="form-group">-->
       <!--<div class="radio">-->
-      <ul>
+      <!--<ul>
         <li ng-repeat="option in x.opciones">
               <label>
             <input type="radio" name="option_question_{{x.id}}" ng-model="x.selected_id" ng-value="option.op"/>
             {{option.descripcion}}
+            
           </label>
             </li>
-            </ul>
+            </ul>-->
       <!--</div>-->
             <!--<div class="radio">
                 <label>
@@ -53,20 +58,26 @@
 <script>
 var app = angular.module('myApp', []);
 app.controller('customersCtrl', function($scope, $http) {
-    $scope.selected_ids= ['a']; //variable en donde se guarda lo seleccionado en cada pregunta
+    $scope.selected_ids= []; //variable en donde se guarda lo seleccionado en cada pregunta
     //$scope.existe= 0;
     //$scope.rsp= null;
     //$scope.myVar= 0;
   $http.get("data/principiante.json").then(function (response) { //se lee el archivo con las preguntas
       $scope.myData = response.data.preguntas;
+      //$scope.selected_ids= $scope.myData.preguntas.opciones[0].op;
       /*
       for (var j = 0; j < $scope.myData.length; j++){
         $scope.selected_ids[j]= $scope.myData.preguntas[j].id;
       }
       */
   });
+
+  $scope.update = function() {
+    //console.log($scope.selected_id.op, $scope.selected_id.descripcion)
+    };
   
   $scope.validate= function(myVar){
+      console.log($scope.selected_id);
     //alert(myVar);
     angular.forEach($scope.myData.preguntas, function(x) {
       $scope.selected_ids.push(x.selected_id);
